@@ -1,0 +1,65 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* body{
+  background-image:url("https://images.squarespace-cdn.com/content/v1/5d529b54c9e4c40001de375f/1651669841305-44IY9NPD9O9EIBOPM8AF/abbots-butcher-wholesome-food.jpg?format=2500w");
+ 
+} */
+/* .card{
+   background-image: url("https://www.frescofud.com/blog_image/e9c316e8d66ebb759686628d71d0165e.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+ 
+} */
+.appbar{
+  background-image: url("https://as2.ftcdn.net/v2/jpg/02/84/46/89/1000_F_284468930_li1i8APKJuZsHmKMNsjScGeTpS0x1vPd.jpg");
+
+  background-size: cover;
+}
+body{
+
+
+background: linear-gradient(-70deg,rgb(157, 223, 240) ,30%, hwb(193 87% 3%) 30%);
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: cover;
+
+
+}
