@@ -17,18 +17,20 @@ export default function Customerreg() {
   const [data, setData] = useState();
   const [profile, setProfile] = useState({});
   const navigate = useNavigate();
-  const fetch = () => {
+
+  // Give functions and variables sensible names
+  const handleLoginRedirect = () => {
     navigate("/login");
   };
 
-  const handleChange = (e) => {
+  const handleDataChange = (e) => {
     setData({
       ...data,
 
       [e.target.name]: e.target.value,
     });
   };
-  const handleChange2 = (e) => {
+  const handleProfileChange = (e) => {
     setProfile({
       ...profile,
 
@@ -36,7 +38,7 @@ export default function Customerreg() {
     });
   };
 
-  const Signup = () => {
+  const handleSignup = () => {
     setData({ ...data, profile: profile });
     console.log("dt", data);
     axios
@@ -74,7 +76,7 @@ export default function Customerreg() {
                 name="username"
                 label="username"
                 variant="outlined"
-                onChange={handleChange}
+                onChange={handleDataChange}
               />
               <br />
               <br />
@@ -82,7 +84,7 @@ export default function Customerreg() {
               <TextField
                 name="password"
                 label="password"
-                onChange={handleChange}
+                onChange={handleDataChange}
               />
               <br />
               <br />
@@ -90,7 +92,7 @@ export default function Customerreg() {
               <TextField
                 name="first_name"
                 label="first_name"
-                onChange={handleChange}
+                onChange={handleDataChange}
               />
               <br />
               <br />
@@ -98,19 +100,19 @@ export default function Customerreg() {
               <TextField
                 name="last_name"
                 label=" last_name"
-                onChange={handleChange}
+                onChange={handleDataChange}
               />
               <br />
               <TextField
                 name="birth_date"
                 type="date"
-                onChange={handleChange2}
+                onChange={handleProfileChange}
               />
               <br />
               <br />
               <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
-                onChange={handleChange2}
+                onChange={handleProfileChange}
                 name="gender"
               >
                 <FormControlLabel
@@ -126,7 +128,7 @@ export default function Customerreg() {
                 name="phone_number"
                 type="number"
                 label="phone_number"
-                onChange={handleChange2}
+                onChange={handleProfileChange}
               />
               <br />
               <br />
@@ -134,17 +136,17 @@ export default function Customerreg() {
                 name="city"
                 type="text"
                 label="city"
-                onChange={handleChange2}
+                onChange={handleProfileChange}
               />
               <br />
               <br />
-              <Button variant="contained" color="primary" onClick={Signup}>
+              <Button variant="contained" color="primary" onClick={handleSignup}>
                 sign up
               </Button>
               <br />
               <Typography>
                 Already have any account
-                <Button variant="outlined" onClick={fetch}>
+                <Button variant="outlined" onClick={handleLoginRedirect}>
                   sign in
                 </Button>
               </Typography>

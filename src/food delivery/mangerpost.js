@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import baseUrl from "../base/baseurl";
-import Modalcomponent from "../modal/modalcomponent";
+import Modalcomponent from "../student/modalcomponent";
 
 export default function ManagerPost() {
     const[apidata,setApidata]=useState()

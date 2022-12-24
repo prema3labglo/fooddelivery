@@ -1,10 +1,13 @@
-import { Button, Card, CardContent, TextField } from "@mui/material";
+import { Button,
+         Card,
+        CardContent,
+        TextField } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import baseUrl from "../base/baseurl";
 import Modalcomponent from "../modal/modalcomponent";
-import LocalDiningIcon from '@mui/icons-material/LocalDining';
-import RamenDiningIcon from '@mui/icons-material/RamenDining';
+import LocalDiningIcon from "@mui/icons-material/LocalDining";
+import RamenDiningIcon from "@mui/icons-material/RamenDining";
 import { Link } from "react-router-dom";
 
 export default function CreateFood() {
@@ -13,8 +16,7 @@ export default function CreateFood() {
     name: "",
     price: "",
   });
-  const [foodDetails,setFoodDetails]=useState()
-  
+  const [foodDetails, setFoodDetails] = useState();
 
   const [image, setImage] = useState();
   const [id, setId] = useState("");
@@ -42,7 +44,7 @@ export default function CreateFood() {
     form_data.append("image", image, image?.name);
 
     axios
-      .post( baseUrl("/manager/foods/"), form_data, {
+      .post(baseUrl("/manager/foods/"), form_data, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Token ${token}`,
@@ -52,60 +54,85 @@ export default function CreateFood() {
       .catch((error) => console.log(error));
   };
 
-  
-  
-
   return (
     <>
-    {}
-  
-     
-          <Card variant="outlined" sx={{ maxWidth: "474px", height: "800px",marginTop:"60px",marginLeft:"750px",bgcolor:"rgb(157, 223, 240) "}}>
-            <center>
-            
-              <br/><br/><br/>
-             
-              <br/><br/><br/>
-              <h1 > <RamenDiningIcon sx={{fontSize:"70px"}}/>create food</h1>
-              <br/><br/><br/>
-              <form type="multipart/form-data">
-                <TextField
-                  type="text"
-                  name="name"
-                  onChange={handleChange}
-                  label="name"
-                />
-                <br />
-                <br/>
-                <br/><br/>
-                <TextField
-                  name="price"
-                  type="number"
-                  onChange={handleChange}
-                  label="price"
-                />
-                <br />
-                <br />
-                <br/><br/>
-                <TextField
-                  name="image"
-                  type="file"
-                  onChange={(e) => setImage(e.target.files[0])}
-                />
+      {}
 
-                <br />
-                <br />
-                <br/><br/>
-                <Button variant="contained" color="primary" sx={{marginLeft:"50px"}}><Link to={-1}>Back</Link></Button>
-              &nbsp;
-                <Button variant="contained" color="secondary" onClick={handleSubmit}>
-                  add food<RamenDiningIcon />
-                </Button>
-               
-              </form>
-            </center>
-          </Card>
-       
+      <Card
+        variant="outlined"
+        sx={{
+          maxWidth: "474px",
+          height: "800px",
+          marginTop: "60px",
+          marginLeft: "750px",
+          bgcolor: "rgb(157, 223, 240) ",
+        }}
+      >
+        <center>
+          <br />
+          <br />
+          <br />
+
+          <br />
+          <br />
+          <br />
+          <h1>
+            {" "}
+            <RamenDiningIcon sx={{ fontSize: "70px" }} />
+            create food
+          </h1>
+          <br />
+          <br />
+          <br />
+          <form type="multipart/form-data">
+            <TextField
+              type="text"
+              name="name"
+              onChange={handleChange}
+              label="name"
+            />
+            <br />
+            <br />
+            <br />
+            <br />
+            <TextField
+              name="price"
+              type="number"
+              onChange={handleChange}
+              label="price"
+            />
+            <br />
+            <br />
+            <br />
+            <br />
+            <TextField
+              name="image"
+              type="file"
+              onChange={(e) => setImage(e.target.files[0])}
+            />
+            <br />
+            <br />
+            <br />
+            <br />
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ marginLeft: "50px" }}
+            >
+              <Link to={-1}>Back</Link>
+            </Button>
+            &nbsp;
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={handleSubmit}
+            >
+              add food
+              <RamenDiningIcon />
+            </Button>
+          </form>
+        </center>
+      </Card>
     </>
   );
 }

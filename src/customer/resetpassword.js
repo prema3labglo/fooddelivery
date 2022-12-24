@@ -2,7 +2,7 @@ import { Button, TextField } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
 import baseUrl from "../base/baseurl";
-import Modalcomponent from "../modal/modalcomponent";
+import Modalcomponent from "../student/modalcomponent";
 
 export default function ResetPassword(){
     const [details,setDetails]=useState()

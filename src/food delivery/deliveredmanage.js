@@ -128,13 +128,22 @@ export default function Deliveredmanager() {
                                                 component="img"
                                                 height="150"
                                                 image={el.image}
-                                                sx={{ width: "250px", borderRadius:"10%" }}
+                                                sx={{
+                                                  width: "250px",
+                                                  borderRadius: "10%",
+                                                }}
                                               />
                                             </TableCell>
-                                            <TableCell> 
-
-                                              <Typography sx={{color:"crimson",marginLeft:"-20px"}}> 
-                                              <h4 sx={{color:"black"}}>DETAILS</h4> 
+                                            <TableCell>
+                                              <Typography
+                                                sx={{
+                                                  color: "crimson",
+                                                  marginLeft: "-20px",
+                                                }}
+                                              >
+                                                <h4 sx={{ color: "black" }}>
+                                                  DETAILS
+                                                </h4>
                                                 <Typography>
                                                   {el.name.toUpperCase()}
                                                 </Typography>
@@ -154,13 +163,14 @@ export default function Deliveredmanager() {
                                                   return (
                                                     <>
                                                       <Card
-                                                      variant="outlined"
+                                                        variant="outlined"
                                                         sx={{
-                                                          bgcolor:"transparent",
-                                                          
+                                                          bgcolor:
+                                                            "transparent",
+
                                                           maxWidth: "200px",
                                                           color: "tomato",
-                                                          borderRadius:"10%"
+                                                          borderRadius: "10%",
                                                         }}
                                                       >
                                                         <CardContent>
@@ -169,10 +179,7 @@ export default function Deliveredmanager() {
                                                             {info.username.toUpperCase()}
                                                           </Typography>
                                                           <Typography>
-                                                            {
-                                                              info.profile
-                                                                .address.toUpperCase()
-                                                            }
+                                                            {info.profile.address.toUpperCase()}
                                                           </Typography>
                                                           <Typography>
                                                             {info.profile.city.toUpperCase()}
@@ -184,14 +191,18 @@ export default function Deliveredmanager() {
                                                 })}
                                             </TableCell>
                                             <TableCell>
-                                              <Typography sx={{color:"darkgreen"}}>
-                                              <Typography>DELIVERED</Typography>
-                                              <Typography>
-                                                {dateFormat(
-                                                  details.delivered_datetime,
-                                                  "dddd, mmmm dS, yyyy"
-                                                )}
-                                              </Typography>
+                                              <Typography
+                                                sx={{ color: "darkgreen" }}
+                                              >
+                                                <Typography>
+                                                  DELIVERED
+                                                </Typography>
+                                                <Typography>
+                                                  {dateFormat(
+                                                    details.delivered_datetime,
+                                                    "dddd, mmmm dS, yyyy"
+                                                  )}
+                                                </Typography>
                                               </Typography>
                                             </TableCell>
                                           </TableRow>

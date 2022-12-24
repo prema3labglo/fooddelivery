@@ -1,9 +1,9 @@
+// Import packages related first
 import "./App.css";
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Register from "./food delivery/register";
 import Login from "./food delivery/login";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Restaurent from "./food delivery/restaurent";
 import ManagerPost from "./food delivery/mangerpost";
 import FoodList from "./food delivery/foodlist";
@@ -30,7 +30,6 @@ function App() {
           <Route path="/" element={<Customerreg />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/cuslogin/restaurants" element={<Restaurent />} />
           <Route path="/managerpost" element={<ManagerPost />} />
           <Route path="/cuslogin/foodlist" element={<FoodList />} />

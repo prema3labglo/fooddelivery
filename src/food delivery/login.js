@@ -10,6 +10,7 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import baseUrl from "../base/baseurl";
 import Modalcomponent from "../modal/modalcomponent";
 import CloseIcon from "@mui/icons-material/Close";
@@ -19,8 +20,8 @@ export default function Login() {
     username: "",
     password: "",
   });
-  const [passData,setPassData]=useState()
-  const [details,setDetails]=useState()
+  const [passData, setPassData] = useState();
+  const [details, setDetails] = useState();
   const [token, setToken] = useState();
   const [profiles, setProfiles] = useState();
   const fetch = useNavigate();
@@ -28,18 +29,18 @@ export default function Login() {
   const admin = "8efb6f05f1a84f8eab9a0a77fb589a5c288a2561";
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+
   const handleOpen = () => {
     setOpen(true);
-    
   };
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handleReg=()=>{
-    navigate("/")
-  }
+  const handleReg = () => {
+    navigate("/");
+  };
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -72,48 +73,46 @@ export default function Login() {
       .catch((error) => console.log(error));
   };
 
-  const handleChange1=(e)=>{
-    setDetails({...details,[e.target.name]:e.target.value})
-  }
-    
-  
+  const handleChange1 = (e) => {
+    setDetails({ ...details, [e.target.name]: e.target.value });
+  };
 
-  const handleSubmitdata=()=>{
-    console.log("det",details)
-    axios.post((baseUrl("/api/password_reset/")),details,{
+  const handleSubmitdata = () => {
+    console.log("det", details);
+    axios
+      .post(baseUrl("/api/password_reset/"), details, {
         headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Token ${token}`,
-          },
+          "Content-Type": "multipart/form-data",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then((res) => console.log(res.data))
+      .catch((error) => console.log(error));
+  };
 
-    })
-    .then((res)=>console.log(res.data))
-    .catch((error)=>console.log(error))
-  }
+  const handleChangepassword = (e) => {
+    setPassData({ ...passData, [e.target.name]: e.target.value });
+  };
 
-  const handleChangepassword=(e)=>{
-    setPassData({...passData,[e.target.name]:e.target.value})
-
-  }
-
-  const reSetting =()=>{
-    console.log("pass",passData)
-    axios.post(baseUrl("/api/password_reset/confirm/"),passData)
-    .then((res)=>console.log(res.data))
-    .catch((error)=>console.log(error))
-  }
-
+  const reSetting = () => {
+    console.log("pass", passData);
+    axios
+      .post(baseUrl("/api/password_reset/confirm/"), passData)
+      .then((res) => console.log(res.data))
+      .catch((error) => console.log(error));
+  };
 
   useEffect(() => {
     checkData();
 
-    if (token !== undefined && check == "true") {
+    // Use === instead of == accordingly
+    if (token !== undefined && check ==="true") {
       fetch("/createfood");
       console.log("success");
 
       localStorage.setItem("token", token);
       localStorage.setItem("username", data.username);
-    } else if (token !== undefined && check == "false") {
+    } else if (token !== undefined && check === "false") {
       fetch("/cuslogin/foodlist");
       localStorage.setItem("token", token);
       localStorage.setItem("username", data.username);
@@ -177,12 +176,14 @@ export default function Login() {
                 >
                   forget password ?
                 </Fab>
-                <br/>
+                <br />
               </Typography>
               <Typography>Don't have any account?</Typography>
-              <br/>
-              <br/>
-              <Button variant="contained" onClick ={handleReg}>Register</Button>
+              <br />
+              <br />
+              <Button variant="contained" onClick={handleReg}>
+                Register
+              </Button>
             </CardContent>
           </Card>
 
@@ -194,33 +195,51 @@ export default function Login() {
                 <Card>
                   <CardContent>
                     <center>
-                    <CloseIcon onClick={handleClose} sx={{marginLeft:"400px"}}/>
+                      <CloseIcon
+                        onClick={handleClose}
+                        sx={{ marginLeft: "400px" }}
+                      />
 
-                    <br/>
-                    <h4>Reset Your Password</h4>
-                    <br/>
-                    <TextField
-                      variant="outlined"
-                      name="email"
-                      onChange={handleChange1}
-                      label="enter your email"
-                    />
-                    <br />
-                    <br />
-                    <Button variant="contained" onClick={handleSubmitdata}>
-                      {" "}
-                      confirm
-                    </Button>
-                    <br/><br/>
-                    <Typography>Confirm your password</Typography>
-                    <br/>
-                    <TextField variant="outlined" name="token" onChange={handleChangepassword} label="enter your otp"/>
-                    <br/>
-                    <br/><br/>
-                    <TextField variant="outlined" name="password" onChange={handleChangepassword} label="new password"/>
-                    <br/>
-                    <br/><br/>
-                    <Button variant="contained" onClick={reSetting}>submit</Button>
+                      <br />
+                      <h4>Reset Your Password</h4>
+                      <br />
+                      <TextField
+                        variant="outlined"
+                        name="email"
+                        onChange={handleChange1}
+                        label="enter your email"
+                      />
+                      <br />
+                      <br />
+                      <Button variant="contained" onClick={handleSubmitdata}>
+                        {" "}
+                        confirm
+                      </Button>
+                      <br />
+                      <br />
+                      <Typography>Confirm your password</Typography>
+                      <br />
+                      <TextField
+                        variant="outlined"
+                        name="token"
+                        onChange={handleChangepassword}
+                        label="enter your otp"
+                      />
+                      <br />
+                      <br />
+                      <br />
+                      <TextField
+                        variant="outlined"
+                        name="password"
+                        onChange={handleChangepassword}
+                        label="new password"
+                      />
+                      <br />
+                      <br />
+                      <br />
+                      <Button variant="contained" onClick={reSetting}>
+                        submit
+                      </Button>
                     </center>
                   </CardContent>
                 </Card>

@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import Modalcomponent from "../modal/modalcomponent";
+import Modalcomponent from "../student/modalcomponent";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import axios from "axios";
 import baseUrl from "../base/baseurl";
