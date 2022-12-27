@@ -21,7 +21,8 @@ export default function ActiveOrder() {
   const [active, setActive] = useState();
   const [cartdetails, setCartdetails] = useState();
   const [foodInfo, setFoodInfo] = useState();
-  const token = localStorage.getItem("token");
+  const token = JSON.parse(localStorage.getItem("token"));
+  console.log("token",token.access)
   const [info, setInfo] = useState();
 
   const style = {
@@ -40,7 +41,7 @@ export default function ActiveOrder() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((response) => setActive(response.data))
@@ -53,7 +54,7 @@ export default function ActiveOrder() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((response) => setCartdetails(response.data))
@@ -70,7 +71,7 @@ export default function ActiveOrder() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((response) => console.log(response.data))
@@ -84,7 +85,7 @@ export default function ActiveOrder() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((response) => console.log(response.data))
@@ -93,7 +94,13 @@ export default function ActiveOrder() {
 
   const foodlist = () => {
     axios
-      .get(baseUrl("/food/"))
+      .get(baseUrl("/food/"),{
+        headers: {
+          Accept: "application/json",
+          "content-type": "application/json",
+          Authorization: `Bearer ${token.access}`,
+        },
+      })
       .then((response) => setFoodInfo(response.data))
       .catch((error) => console.log(error));
   };
@@ -104,7 +111,7 @@ export default function ActiveOrder() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((response) => setInfo(response.data))

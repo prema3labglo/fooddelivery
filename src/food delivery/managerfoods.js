@@ -18,7 +18,7 @@ export default function Managerfoodlist() {
   const [image,setImage]=useState()
   const [foodDetails,setFoodDetails]=useState()
   const manager = localStorage.getItem("username");
-  const token = localStorage.getItem("token");
+  const token = JSON.parse(localStorage.getItem("token"));
   const admins = "8efb6f05f1a84f8eab9a0a77fb589a5c288a2561";
 
   const navigate=useNavigate()
@@ -58,7 +58,7 @@ export default function Managerfoodlist() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${admins}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((response) => setProfileList(response.data))
@@ -71,7 +71,7 @@ export default function Managerfoodlist() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${admins}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((response) => setReslist(response.data))
@@ -99,7 +99,7 @@ export default function Managerfoodlist() {
       headers: {
         Accept: "application/json",
         "Content-Type": "multipart/form-data",
-        Authorization: `Token ${token}`
+        Authorization: `Bearer ${token.access}`
       },
 
     })
@@ -112,7 +112,7 @@ export default function Managerfoodlist() {
       headers: {
         Accept: "application/json",
         "Content-Type": "multipart/form-data",
-        Authorization: `Token ${token}`
+        Authorization: `Bearer ${token.access}`
       }
 
     }) 

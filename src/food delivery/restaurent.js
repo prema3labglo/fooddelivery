@@ -26,28 +26,23 @@ export default function Restaurent() {
     setId(id);
     setOpen(true);
   };
-  const navigate=useNavigate()
+  const token = JSON.parse(localStorage.getItem("token"));
+  const navigate = useNavigate();
   const style = {
-   
-      float: "left",
-      display: "flex",
-      marginTop: "150px",
-      margin: "100px",
-      width: "400px",
-      height: "450px",
-      backgroundColor: "#5c5958",
-      // backgroundColor: "white",
-      marginLeft: "450px",
-   
+    float: "left",
+    display: "flex",
+    marginTop: "150px",
+    margin: "100px",
+    width: "400px",
+    height: "450px",
+    backgroundColor: "#5c5958",
+    // backgroundColor: "white",
+    marginLeft: "450px",
   };
-  const fetching=(id)=>{
-    console.log("id",id)
-    navigate(`/resfoodlist/${id}`)
-
-  }
-
-  
-
+  const fetching = (id) => {
+    console.log("id", id);
+    navigate(`/resfoodlist/${id}`);
+  };
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -60,7 +55,13 @@ export default function Restaurent() {
 
   const loadData = () => {
     axios
-      .get(baseUrl("/restaurant/"))
+      .get(baseUrl("/restaurant/"), {
+        headers: {
+          Accept: "application/json",
+          "content-type": "application/json",
+          Authorization: `Bearer ${token.access}`,
+        },
+      })
       .then((response) => setApidata(response.data))
       .catch((error) => console.log(error));
   };
@@ -68,31 +69,36 @@ export default function Restaurent() {
 
   return (
     <div>
-      <div className="restaurent" style={{backgroundImage:'url("https://finland.ihg.com/wp-content/uploads/2022/01/hotel_indigo_restaurant-1600px.jpg")',marginLeft:"300px",maxWidth:"1700px",height:"400px"}}>
-        
-
+      <div
+        className="restaurent"
+        style={{
+          backgroundImage:
+            'url("https://finland.ihg.com/wp-content/uploads/2022/01/hotel_indigo_restaurant-1600px.jpg")',
+          marginLeft: "300px",
+          maxWidth: "1700px",
+          height: "400px",
+        }}
+      >
         <center>
-       
-              <Typography
-                variant="h4"
-                component="a"
-                sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontFamily: "Segoe UI Symbol",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "black",
-                  textDecoration: "none",
-                  marginLeft:"600px"
-                }}
-              >
-                ENJOY YOUR MEAL
-              </Typography>
-
+          <Typography
+            variant="h4"
+            component="a"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "Segoe UI Symbol",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "black",
+              textDecoration: "none",
+              marginLeft: "600px",
+            }}
+          >
+            ENJOY YOUR MEAL
+          </Typography>
         </center>
       </div>
-     
+
       <center>
         {apidata?.map((data) => {
           return (
@@ -104,8 +110,7 @@ export default function Restaurent() {
                   sx={{ maxWidth: "300px", marginLeft: "55px" }}
                   image={data.image}
                   alt="Paella dish"
-                  onClick={()=>fetching(data.id)}
-
+                  onClick={() => fetching(data.id)}
                 />
                 <br />
                 <CardContent>
@@ -124,16 +129,12 @@ export default function Restaurent() {
                       color="secondary"
                       size="large"
                       onClick={() => handleOpen(data.id)}
-                      
                     >
                       view
                     </Button>
-                 
                   </Typography>
                 </CardContent>
               </Card>
-
-             
             </>
           );
         })}

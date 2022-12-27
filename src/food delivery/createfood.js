@@ -8,7 +8,7 @@ import RamenDiningIcon from '@mui/icons-material/RamenDining';
 import { Link } from "react-router-dom";
 
 export default function CreateFood() {
-  const token = localStorage.getItem("token");
+  const token = JSON.parse(localStorage.getItem("token"));
   const [create, setCreate] = useState({
     name: "",
     price: "",
@@ -45,7 +45,7 @@ export default function CreateFood() {
       .post( baseUrl("/manager/foods/"), form_data, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((response) => console.log(response.data))

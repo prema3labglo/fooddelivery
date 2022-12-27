@@ -49,6 +49,7 @@ export default function PermanentDrawerLeft() {
   const manager = ["orderlist", "managerdelivered", "createfood"];
   const customer = ["foodlist", ""];
   const username = localStorage.getItem("username");
+  const token=localStorage.getItem("token")
 
   const navigate = useNavigate();
   const [apidata, setApidata] = useState([]);
@@ -80,7 +81,7 @@ export default function PermanentDrawerLeft() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${admins}`,
+          Authorization: `Token ${token}`,
         },
       })
       .then((response) => setApidata(response.data))
@@ -102,7 +103,9 @@ export default function PermanentDrawerLeft() {
     <>
       {location.pathname !== "/login" &&
       location.pathname !== "/" &&
-      location.pathname !== "/cusreg" ? (
+      location.pathname !== "/cusreg" &&
+      location.pathname !=="/redirect" ? 
+      (
         <Box sx={{ display: "flex" }}>
           <CssBaseline />
           <AppBar

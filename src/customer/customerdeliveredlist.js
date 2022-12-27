@@ -21,7 +21,8 @@ export default function Deliveredlist() {
   const [card, setCard] = useState();
   const [food, setFood] = useState();
   const [reslist, setReslist] = useState();
-  const token = localStorage.getItem("token");
+  const token = JSON.parse(localStorage.getItem("token"));
+  console.log("token",token.access)
   var options = { year: "numeric", month: "long", day: "numeric" };
 
   const formatDate = (string) => {
@@ -34,7 +35,7 @@ export default function Deliveredlist() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((res) => setDelivered(res.data))
@@ -47,7 +48,7 @@ export default function Deliveredlist() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((response) => setCard(response.data))
@@ -55,7 +56,13 @@ export default function Deliveredlist() {
   };
   const foodlist = () => {
     axios
-      .get(baseUrl("/food/"))
+      .get(baseUrl("/food/"),{
+        headers: {
+          Accept: "application/json",
+          "content-type": "application/json",
+          Authorization: `Bearer ${token.access}`,
+        },
+      })
       .then((response) => setFood(response.data))
       .catch((error) => console.log(error));
   };
@@ -66,7 +73,7 @@ export default function Deliveredlist() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => setReslist(res.data))

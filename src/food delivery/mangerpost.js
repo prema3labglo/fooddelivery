@@ -9,7 +9,7 @@ export default function ManagerPost() {
     const[apidata,setApidata]=useState()
     const[image,setImage]=useState()
     let form_data=new FormData()
-    const token=localStorage.getItem("token")
+    const token = JSON.parse(localStorage.getItem("token"));
     const [open, setOpen] = useState(true);
     const navigate=useNavigate()
     
@@ -43,7 +43,7 @@ export default function ManagerPost() {
             {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    'Authorization': `Token ${token}`
+                    Authorization: `Bearer ${token.access}`
                 }
             }
         )

@@ -7,6 +7,7 @@ import baseUrl from "../base/baseurl";
 export default function Restaurentfoods() {
   const { id } = useParams();
   const [foodlist, setFoodlist] = useState();
+  const token = JSON.parse(localStorage.getItem("token"));
 
   const loadData = () => {
     axios

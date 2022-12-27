@@ -7,7 +7,8 @@ import Modalcomponent from "../modal/modalcomponent";
 export default function ResetPassword(){
     const [details,setDetails]=useState()
     const [open, setOpen] = useState(true);
-    const token=localStorage.getItem("token")
+    const token = JSON.parse(localStorage.getItem("token"));
+  console.log("token",token.access)
   const handleOpen=()=>{
     setOpen(true)
    
@@ -23,7 +24,7 @@ export default function ResetPassword(){
         axios.put(baseUrl("api/change-password/"),details,{
             headers: {
                 "Content-Type": "multipart/form-data",
-                Authorization: `Token ${token}`,
+                Authorization: `Bearer ${token.access}`,
               },
 
 

@@ -41,7 +41,7 @@ export default function Orderfood() {
   const [data, setData] = useState();
   const [edit, setEdit] = useState({ quantity: "", name: "", food: "" });
   console.log("datas", data);
-  const token = localStorage.getItem("token");
+  const token = JSON.parse(localStorage.getItem("token"));
   const [details, setDetails] = useState({ note: "" });
   const [food, setFood] = useState([]);
   const [foodlist, setFoodlist] = useState();
@@ -87,7 +87,7 @@ export default function Orderfood() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((response) => setData(response.data))
@@ -100,7 +100,13 @@ export default function Orderfood() {
 
   const loadData = () => {
     axios
-      .get(baseUrl("/food/"))
+      .get(baseUrl("/food/"),{
+        headers: {
+          Accept: "application/json",
+          "content-type": "application/json",
+          Authorization: `Bearer ${token.access}`,
+        },
+      })
       .then((response) => setFoodlist(response.data))
       .catch((error) => console.log(error));
   };
@@ -112,7 +118,7 @@ export default function Orderfood() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((response) => console.log(response.data))
@@ -129,7 +135,7 @@ export default function Orderfood() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
 
@@ -147,7 +153,7 @@ export default function Orderfood() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((response) => console.log(response.data))
@@ -225,8 +231,7 @@ export default function Orderfood() {
             {data?.map((card, index) => {
               return (
                 <>
-                  {foodlist
-                    .filter((details) => details.id == card.food)
+                  {foodlist?.filter((details) => details.id == card.food)
                     ?.map((el) => {
                       return (
                         <>

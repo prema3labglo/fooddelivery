@@ -18,7 +18,8 @@ import baseUrl from "../base/baseurl";
 
 export default function Customerorderlist() {
   const [orderdlist, setOrderdlist] = useState();
-  const token = localStorage.getItem("token");
+  const token = JSON.parse(localStorage.getItem("token"));
+  console.log("token",token.access)
   const [food, setFood] = useState();
   const [cartList, setCartList] = useState();
   const [reslist, setReslist] = useState();
@@ -39,7 +40,7 @@ export default function Customerorderlist() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((response) => setOrderdlist(response.data))
@@ -48,7 +49,13 @@ export default function Customerorderlist() {
 
   const foodlist = () => {
     axios
-      .get(baseUrl("/food/"))
+      .get(baseUrl("/food/"),{
+        headers: {
+          Accept: "application/json",
+          "content-type": "application/json",
+          Authorization: `Bearer ${token.access}`,
+        },
+      })
       .then((response) => setFood(response.data))
       .catch((error) => console.log(error));
     console.log(food);
@@ -59,7 +66,7 @@ export default function Customerorderlist() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((response) => setCartList(response.data))
@@ -74,7 +81,7 @@ export default function Customerorderlist() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((response) => console.log(response.data))
@@ -89,7 +96,7 @@ export default function Customerorderlist() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
 
@@ -99,7 +106,13 @@ export default function Customerorderlist() {
 
   const restaurant = () => {
     axios
-      .get(baseUrl("/restaurant/"))
+      .get(baseUrl("/restaurant/"),{
+        headers: {
+          Accept: "application/json",
+          "content-type": "application/json",
+          Authorization: `Bearer ${token.access}`,
+        },
+      })
       .then((response) => setReslist(response.data))
       .catch((error) => console.log(error));
   };

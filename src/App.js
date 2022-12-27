@@ -20,6 +20,7 @@ import Restaurentfoods from "./food delivery/restaurentitem";
 import Managerfoodlist from "./food delivery/managerfoods";
 import ResetPassword from "./customer/resetpassword";
 import ForgetPassword from "./customer/forgetpassword";
+import Redirectlogin from "./customer/Redirectlogin";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <PermanentDrawerLeft />
         <Routes>
           <Route path="/" element={<Customerreg />} />
+          <Route path="/redirect" element={<Redirectlogin/>}/>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/cuslogin/restaurants" element={<Restaurent />} />

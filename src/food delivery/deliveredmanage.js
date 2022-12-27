@@ -21,7 +21,7 @@ export default function Deliveredmanager() {
   const [cartlist, setCartlist] = useState();
   const [foodInfo, setFoodInfo] = useState();
   const [profileList, setProfileList] = useState();
-  const token = localStorage.getItem("token");
+  const token = JSON.parse(localStorage.getItem("token"));
   const admins = "8efb6f05f1a84f8eab9a0a77fb589a5c288a2561";
 
   const style = {
@@ -42,7 +42,7 @@ export default function Deliveredmanager() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((response) => setCartlist(response.data))
@@ -55,7 +55,7 @@ export default function Deliveredmanager() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((res) => setList(res.data))
@@ -65,7 +65,13 @@ export default function Deliveredmanager() {
   const foodlist = () => {
     axios
       .get(baseUrl("/food/"))
-      .then((response) => setFoodInfo(response.data))
+      .then((response) => setFoodInfo(response.data),{
+        headers: {
+          Accept: "application/json",
+          "content-type": "application/json",
+          Authorization: `Bearer ${token.access}`,
+        },
+      })
       .catch((error) => console.log(error));
   };
 
@@ -75,7 +81,7 @@ export default function Deliveredmanager() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((response) => setProfileList(response.data))

@@ -44,7 +44,8 @@ export default function FoodList() {
   };
   const handleClose = () => setOpen(false);
 
-  const token = localStorage.getItem("token");
+  const token = JSON.parse(localStorage.getItem("token"));
+  console.log("token",token.access)
 
   const order = () => {
     fetch("/orderfood");
@@ -77,7 +78,7 @@ export default function FoodList() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((res) => console.log(res))
@@ -90,7 +91,7 @@ export default function FoodList() {
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token.access}`,
         },
       })
       .then((response) => setDatas(response.data))
@@ -102,7 +103,13 @@ export default function FoodList() {
 
   const loadData = () => {
     axios
-      .get(baseUrl("/food/"))
+      .get(baseUrl("/food/"),{
+        headers: {
+          Accept: "application/json",
+          "content-type": "application/json",
+          Authorization: `Bearer ${token.access}`,
+        },
+      })
       .then((response) => setFoodlist(response.data))
       .catch((error) => console.log(error));
   };
